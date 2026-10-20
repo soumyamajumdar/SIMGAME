@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q StationMasterAPK_project.zip
+      - name: Drop unsupported 32-bit ABI
+        run: sed -i 's/, "armeabi-v7a"//' StationMasterAPK/app/build.gradle.kts
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: 17 }
       - uses: actions/setup-python@v5
